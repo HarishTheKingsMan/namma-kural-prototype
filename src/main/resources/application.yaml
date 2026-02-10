@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: namma-kural
+
+  # 👇 UNCOMMENTED THIS BLOCK: This is the critical fix!
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+
+  # Enable Virtual Threads (The Ferrari Engine)
+  threads:
+    virtual:
+      enabled: true
+
+#   👇 COMMENTED OUT FOR DAY 1 (No DB needed yet)
+  datasource:
+     url: jdbc:postgresql://localhost:5432/nammakural
+     username: postgres
+     password: password
+     driver-class-name: org.postgresql.Driver
+
+  jpa:
+     hibernate:
+       ddl-auto: update
+     properties:
+       hibernate:
+         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  port: 8080
